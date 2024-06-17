@@ -16,12 +16,13 @@ const ChatBot = () => {
       return;
     }
 
+
+    try {
+      
     const formData = new FormData();
     formData.append("message", message);
     if (file) formData.append("file", file);
-
-    try {
-      const response = await axios.post("/azure-response", formData, {
+      const response = await axios.post("https://gptserver-q7r5.onrender.com/azure-response", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
