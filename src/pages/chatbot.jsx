@@ -5,6 +5,7 @@ import './chatbot.css';
 
 const ChatBot = () => {
   const [message, setMessage] = useState("");
+  const [loding, setLoding] = useState(false);
   const [file, setFile] = useState(null);
   const [chat, setChat] = useState([]);
 
@@ -18,7 +19,7 @@ const ChatBot = () => {
 
 
     try {
-      
+      setLoding(true) 
     const formData = new FormData();
     formData.append("message", message);
     if (file) formData.append("file", file);
@@ -35,6 +36,7 @@ const ChatBot = () => {
       console.error("Error fetching Azure OpenAI response:", err);
       alert("Error fetching response. Please try again.");
     }
+    finally{setLoding(false)}
   };
 
   return (
@@ -63,7 +65,7 @@ const ChatBot = () => {
           placeholder="Enter your message here..."
           required
         />
-        <button type="submit">Send</button>
+        <button type="submit">{loding ? "Loding...":"Send"}</button>
       </form>
      
     </div>
